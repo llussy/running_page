@@ -3,7 +3,7 @@ name: Run Data Sync
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 0 * * 3,5"
   push:
     branches:
       - master
@@ -63,7 +63,7 @@ jobs:
       - name: Run sync codoon script
         if: env.RUN_TYPE == 'codoon'
         run: |
-            python scripts/codoon_sync.py ${{ secrets.CODOON_MOBILE_NUMBER }} ${{ secrets.CODOON_PASS }}
+            python scripts/codoon_sync.py ${{ secrets.CODOON_MOBILE_NUMBER }} ${{ secrets.CODOON_PASS }} --with-gpx
 
       - name: Make svg GitHub profile
         if: env.RUN_TYPE != 'pass'
