@@ -1,5 +1,3 @@
-## 注：如果是之前 clone 或 Fork 的朋友 vercel 显示 404 可能需要更新下代码
-
 <p align="center">
   <img width="150" src="https://raw.githubusercontent.com/shaonianche/gallery/master/running_page/running_page_logo.png" />
 </p>
@@ -11,6 +9,10 @@
 <p align="center">
   <a href="https://github.com/llussy/running_page/actions"><img src="https://github.com/llussy/running_page/actions/workflows/run_data_sync.yml/badge.svg" alt="Github Action"></a>
   <a href="https://t.me/running_page"><img src="https://badgen.net/badge/icon/join?icon=telegram&amp;label=usergroup" alt="Chat on telegram"></a>
+</p>
+
+<p align="center">
+<a href="https://github.com/llussy/running_page/blob/master/assets/github.svg"><img width="500px" src="https://github.com/llussy/running_page/blob/master/assets/github.svg"/></a>
 </p>
 
 English | [简体中文](https://github.com/llussy/running_page/blob/master/README-CN.md) | [Wiki](https://mfydev.github.io/Running-Page-Wiki/)
