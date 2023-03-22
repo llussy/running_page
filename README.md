@@ -9,15 +9,11 @@
 </h3>
 
 <p align="center">
-  <a href="https://github.com/yihong0618/running_page/actions"><img src="https://github.com/yihong0618/running_page/actions/workflows/run_data_sync.yml/badge.svg" alt="Github Action"></a>
+  <a href="https://github.com/llussy/running_page/actions"><img src="https://github.com/llussy/running_page/actions/workflows/run_data_sync.yml/badge.svg" alt="Github Action"></a>
   <a href="https://t.me/running_page"><img src="https://badgen.net/badge/icon/join?icon=telegram&amp;label=usergroup" alt="Chat on telegram"></a>
 </p>
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/15976103/98808834-c02f1d80-2457-11eb-9a7c-70e91faa5e30.gif" alt="demo" width="800">
-</p>
-
-English | [简体中文](https://github.com/yihong0618/running_page/blob/master/README-CN.md) | [Wiki](https://mfydev.github.io/Running-Page-Wiki/)
+English | [简体中文](https://github.com/llussy/running_page/blob/master/README-CN.md) | [Wiki](https://mfydev.github.io/Running-Page-Wiki/)
 
 ## [Runner's Page Show](https://github.com/yihong0618/running_page/issues/12)
 
@@ -168,7 +164,7 @@ siteMetadata: {
     },
     {
       name: 'About',
-      url: 'https://github.com/yihong0618/running_page/blob/master/README-CN.md',
+      url: 'https://github.com/llussy/running_page/blob/master/README-CN.md',
     },
   ],
 },
@@ -505,7 +501,7 @@ ps: **when initializing for the first time, if you have a large amount of strava
 <br>
 
 - Generate SVG data display
-- Display of results：[Click to view](https://raw.githubusercontent.com/yihong0618/running_page/master/assets/github.svg)、[Click to view](https://raw.githubusercontent.com/yihong0618/running_page/28fa801e4e30f30af5ae3dc906bf085daa137936/assets/grid.svg)
+- Display of results：[Click to view](https://raw.githubusercontent.com/llussy/running_page/master/assets/github.svg)、[Click to view](https://raw.githubusercontent.com/llussy/running_page/28fa801e4e30f30af5ae3dc906bf085daa137936/assets/grid.svg)
 
 ```
 python scripts/gen_svg.py --from-db --title "${{ env.TITLE }}" --type github --athlete "${{ env.ATHLETE }}" --special-distance 10 --special-distance2 20 --special-color yellow --special-color2 red --output assets/github.svg --use-localtime --min-distance 0.5
@@ -586,7 +582,7 @@ For more display effects, see:
 <summary> Modifying information in <code> GitHub Actions </code>  </summary>
 <br>
 
-Actions [source code](https://github.com/yihong0618/running_page/blob/master/.github/workflows/run_data_sync.yml)
+Actions [source code](https://github.com/llussy/running_page/blob/master/.github/workflows/run_data_sync.yml)
 The following steps need to be taken
 
 1. change to your app type and info
