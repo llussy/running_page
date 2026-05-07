@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" version="1.1" creator="gpx.py -- https://github.com/tkrajina/gpxpy">
+  <trk>
+    <name>gpx from codoon</name>
+    <type>Run</type>
+    <trkseg>
+      <trkpt lat="38.8483" lon="115.47277">
+        <ele>13.5</ele>
+        <time>2015-04-08T09:11:26Z</time>
+      </trkpt>
+      <trkpt lat="38.84813" lon="115.47269">
+        <ele>17.2</ele>
+        <time>2015-04-08T09:11:32Z</time>
+      </trkpt>
+      <trkpt lat="38.84795" lon="115.47267">
+        <ele>17.1</ele>
+        <time>2015-04-08T09:11:38Z</time>
+      </trkpt>
+      <trkpt lat="38.84779" lon="115.47265">
+        <ele>15.5</ele>
+        <time>2015-04-08T09:11:44Z</time>
+      </trkpt>
+      <trkpt lat="38.8476" lon="115.47263">
+        <ele>15.2</ele>
+        <time>2015-04-08T09:11:49Z</time>
+      </trkpt>
+      <trkpt lat="38.84742" lon="115.47262">
+        <ele>14.2</ele>
+        <time>2015-04-08T09:11:55Z</time>
+      </trkpt>
+      <trkpt lat="38.84725" lon="115.47265">
+        <ele>13.6</ele>
+        <time>2015-04-08T09:12:01Z</time>
+      </trkpt>
+      <trkpt lat="38.84709" lon="115.47279">
+        <ele>13.4</ele>
+        <time>2015-04-08T09:12:07Z</time>
+      </trkpt>
+      <trkpt lat="38.84699" lon="115.47297">
+        <ele>13.4</ele>
+        <time>2015-04-08T09:12:12Z</time>
+      </trkpt>
+      <trkpt lat="38.84699" lon="115.47319">
+        <ele>13.8</ele>
+        <time>2015-04-08T09:12:18Z</time>
+      </trkpt>
+      <trkpt lat="38.84708" lon="115.47339">
+        <ele>14.5</ele>
+        <time>2015-04-08T09:12:24Z</time>
+      </trkpt>
+      <trkpt lat="38.84722" lon="115.47354">
+        <ele>15.3</ele>
+        <time>2015-04-08T09:12:30Z</time>
+      </trkpt>
+      <trkpt lat="38.84737" lon="115.47361">
+        <ele>15.9</ele>
+        <time>2015-04-08T09:12:36Z</time>
+      </trkpt>
+      <trkpt lat="38.84752" lon="115.47362">
+        <ele>16.2</ele>
+        <time>2015-04-08T09:12:41Z</time>
+      </trkpt>
+      <trkpt lat="38.8477" lon="115.47361">
+        <ele>16.6</ele>
+        <time>2015-04-08T09:12:47Z</time>
+      </trkpt>
+      <trkpt lat="38.84787" lon="115.47363">
+        <ele>16.2</ele>
+        <time>2015-04-08T09:12:53Z</time>
+      </trkpt>
+      <trkpt lat="38.84801" lon="115.47363">
+        <ele>16.7</ele>
+        <time>2015-04-08T09:12:58Z</time>
+      </trkpt>
+      <trkpt lat="38.84816" lon="115.47363">
+        <ele>18.4</ele>
+        <time>2015-04-08T09:13:04Z</time>
+      </trkpt>
+      <trkpt lat="38.8483" lon="115.47356">
+        <ele>20.6</ele>
+        <time>2015-04-08T09:13:10Z</time>
+      </trkpt>
+      <trkpt lat="38.84843" lon="115.47339">
+        <ele>20.8</ele>
+        <time>2015-04-08T09:13:16Z</time>
+      </trkpt>
+      <trkpt lat="38.84845" lon="115.47314">
+        <ele>20.9</ele>
+        <time>2015-04-08T09:13:22Z</time>
+      </trkpt>
+      <trkpt lat="38.84842" lon="115.4729">
+        <ele>21</ele>
+        <time>2015-04-08T09:13:28Z</time>
+      </trkpt>
+      <trkpt lat="38.84839" lon="115.47272">
+        <ele>22.3</ele>
+        <time>2015-04-08T09:13:34Z</time>
+      </trkpt>
+      <trkpt lat="38.8484" lon="115.4726">
+        <ele>23.6</ele>
+        <time>2015-04-08T09:13:40Z</time>
+      </trkpt>
+      <trkpt lat="38.84842" lon="115.47253">
+        <ele>23.8</ele>
+        <time>2015-04-08T09:13:45Z</time>
+      </trkpt>
+      <trkpt lat="38.84843" lon="115.47243">
+        <ele>24.1</ele>
+        <time>2015-04-08T09:13:51Z</time>
+      </trkpt>
+      <trkpt lat="38.84843" lon="115.47234">
+        <ele>24.7</ele>
+        <time>2015-04-08T09:13:57Z</time>
+      </trkpt>
+      <trkpt lat="38.84843" lon="115.47227">
+        <ele>25.2</ele>
+        <time>2015-04-08T09:14:03Z</time>
+      </trkpt>
+      <trkpt lat="38.8484" lon="115.47221">
+        <ele>25.6</ele>
+        <time>2015-04-08T09:14:09Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>
