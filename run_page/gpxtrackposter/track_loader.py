@@ -1,7 +1,7 @@
 """Handle parsing of GPX files"""
 
 # Copyright 2016-2019 Florian Pigorsch & Contributors. All rights reserved.
-# 2019-now Yihong0618
+
 #
 # Use of this source code is governed by a MIT-style
 # license that can be found in the LICENSE file.
