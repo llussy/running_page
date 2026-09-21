@@ -26,6 +26,8 @@ git merge upstream/master
 | `src/static/site-metadata.ts` | siteUrl | 手动合并，保留本地 siteUrl |
 | `run_page/codoon_sync.py` | `IS_ONLY_RUN = True` | 手动合并，**改完后确认这一行还在** |
 | `run_page/fix_run_location.py` | 本 fork 新增，上游没有 | 不会冲突 |
+| `.github/workflows/fork-ci.yml` | 本 fork 新增 | 不会冲突，见第六节 |
+| `.github/workflows/fork-pages.yml` | 本 fork 新增 | 不会冲突，见第六节 |
 | `llussy.md` | 本文件 | 不会冲突 |
 
 合并完跑一遍自查（见第五节）。
@@ -82,6 +84,10 @@ IS_ONLY_RUN = True   # 上游默认 False
 ### 4. `run_page/fix_run_location.py`（新增）
 
 补位置的工具脚本，见第四节。
+
+### 5. `.github/workflows/fork-ci.yml`、`fork-pages.yml`（新增）
+
+接管 CI 和页面发布，见第六节。上游的三个 workflow 文件**一行都没改**。
 
 ---
 
@@ -167,7 +173,52 @@ GPX_OUT: 846 个文件（另有 12 条 Run 是室内跑，没轨迹）
 
 ---
 
-## 六、历史操作记录
+## 六、GitHub Actions
+
+上游的三个 workflow 在本 fork 都不能直接用，但**没有改它们**——改了以后每次 merge upstream 都要处理冲突。
+做法是新增两个 `fork-*.yml` 接管，再把上游那两个在网页上禁用掉。
+
+### 必须手动做一次
+
+仓库 → Actions → 左侧列表 → 选中 workflow → 右上 `···` → **Disable workflow**：
+
+- **CI**（`ci.yml`）
+- **Run Data Sync**（`run_data_sync.yml`）
+
+禁用状态存在 GitHub 服务端，不在文件里，所以 merge upstream 不会把它恢复。
+但**如果上游把文件改名，禁用状态会失效**，届时要重新禁用一次。
+
+另外确认：Settings → Pages → Source 必须是 **GitHub Actions**（不是 Deploy from a branch）。
+
+### 为什么不能用上游的
+
+| workflow | 问题 |
+| --- | --- |
+| `ci.yml` | `Run GPX sync test` 会跑 `gpx_sync.py`。它按轨迹起始时间戳算 `run_id`（`track.py:161`，13 位毫秒），而 db 里是咕咚的 9 位活动 id，两者永不相等 → 840 条全被当新记录插入 → 每条走一次 `db.py:122` 的 Nominatim 反查 → 实测 120 秒只完成 29 条，整步 1 小时以上不结束 |
+| `run_data_sync.yml` | 压根没有 codoon 分支（21 个同步步骤里没有），且 `RUN_TYPE: pass`。空转一晚上什么都不同步；但 `Make month of life`（`:256`）和 `Make year summary`（`:269`）没有 `RUN_TYPE` 守卫，照样生成 svg 并提交，每天一个垃圾 commit |
+| `gh-pages.yml` | 只有 `workflow_dispatch` / `workflow_call` 两个触发器，**push 不会触发**。上游把发布挂在 `run_data_sync` 成功之后 |
+
+### 现在的流程
+
+```text
+本地 codoon_sync.py → git commit → push master
+                                      ├→ fork-ci.yml     black / ruff / prettier / eslint / vite build
+                                      └→ fork-pages.yml  → uses: ./.github/workflows/gh-pages.yml
+```
+
+`fork-pages.yml` 只是个触发器，构建逻辑仍然 `uses:` 上游的 `gh-pages.yml`，所以上游改进能跟着 merge 进来。
+传了 `save_data_in_github_cache: false`（数据在 git 里，不需要 Actions cache）和 `secrets: inherit`
+（被调用的 workflow 默认拿不到 secrets，不传 `MAPBOX_TOKEN` 地图会是空白）。
+
+> 上游 `run_data_sync.yml:301` 调 `gh-pages.yml` 时**没有** `secrets: inherit`，所以上游那条链路上
+> `MAPBOX_TOKEN` 实际是空的。这是上游的 bug，本 fork 不走那条链路，不受影响。
+
+`run_data_sync.yml` 保留着（只是禁用），哪天要在 Actions 里跑 `gen_svg` 生成全套 assets，
+临时启用 + 改 `RUN_TYPE` 手动触发即可。
+
+---
+
+## 七、历史操作记录
 
 2026-09-21 首次搭建，做过的一次性操作（**不要重复执行**）：
 
@@ -183,7 +234,7 @@ GPX_OUT: 846 个文件（另有 12 条 Run 是室内跑，没轨迹）
 
 ---
 
-## 七、遗留问题
+## 八、遗留问题
 
 - [ ] `assets/` 目录状态混乱：部分 svg 被删（`year_*.svg`、`github_*.svg`、`grid.svg` 等），
       部分是原作者的旧图。这些**只有 classic 主题用**（`SVGStat`、`YearStat`、`YearSummaryModal`），
@@ -196,5 +247,7 @@ GPX_OUT: 846 个文件（另有 12 条 Run 是室内跑，没轨迹）
       成因是 `gen_svg.py` 的 `--output` 默认值是 `poster.svg`，不传就落在根目录；
       正确路径应是 `assets/github.svg` / `assets/github_2026.svg`。可直接删。
 - [ ] `site-metadata.ts` 的 navLinks 仍指向原作者（见第二节第 2 条）。
-- [ ] 定时同步未配置。若要配，`codoon_sync.py:675` 支持 `--from-auth-token`，
-      用 token + user_id 比命令行明文手机号密码安全。
+- [ ] 定时同步未配置，目前是本地手动同步 + push。若要挪到 Actions，需要自己往
+      `fork-*.yml` 里加一个 codoon 步骤（上游没有），`codoon_sync.py:675` 支持
+      `--from-auth-token`，用 token + user_id 比命令行明文手机号密码安全。
+      注意 `db.py` 的兜底反查没有限速，攒多了会静默丢位置（见第四节）。

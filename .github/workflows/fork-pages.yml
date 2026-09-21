@@ -1,0 +1,29 @@
+# Fork-specific publishing trigger.
+#
+# Data is synced from Codoon locally and committed (run_page/data.db,
+# src/static/activities.json, GPX_OUT/), so Actions has nothing to sync — a push
+# to master is enough to publish. Upstream chains publishing behind
+# run_data_sync.yml's nightly cron; that workflow must be disabled in the repo's
+# Actions settings.
+#
+# The build itself is reused from upstream's gh-pages.yml, so upstream
+# improvements to it are picked up on merge. See llussy.md.
+name: Fork Pages
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  publish:
+    name: Build and publish GitHub Pages
+    uses: ./.github/workflows/gh-pages.yml
+    # Data lives in the repo, so the Actions cache is not used.
+    with:
+      save_data_in_github_cache: false
+      data_cache_prefix: track_data
+    # gh-pages.yml reads secrets.MAPBOX_TOKEN; a called workflow gets no secrets
+    # unless they are passed in.
+    secrets: inherit

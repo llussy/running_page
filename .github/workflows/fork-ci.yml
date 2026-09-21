@@ -1,0 +1,61 @@
+# Fork-specific CI. Replaces the upstream "CI" workflow (.github/workflows/ci.yml),
+# which must be disabled in the repo's Actions settings — its "Run GPX sync test"
+# step does not work here: gpx_sync.py derives run_id from the track start time,
+# while this fork's data.db uses Codoon activity ids, so every track looks new and
+# triggers a Nominatim reverse-geocode lookup. 840 of them take over an hour.
+#
+# Kept in a separate file so merging upstream never touches it. See llussy.md.
+name: Fork CI
+
+on: [push, pull_request]
+
+jobs:
+  python:
+    name: Python lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+          cache-dependency-path: 'requirements-dev.txt'
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt ruff
+
+      - name: Check formatting (black)
+        run: black . --diff --color && black . --check
+
+      - name: Lint with Ruff
+        run: ruff check .
+
+  node:
+    name: Node lint and build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Check and build
+        env:
+          VITE_MAPBOX_TOKEN: ${{ secrets.MAPBOX_TOKEN }}
+        run: |
+          pnpm run check
+          pnpm run lint
+          pnpm run build
