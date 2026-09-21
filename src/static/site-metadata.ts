@@ -16,8 +16,8 @@ const getBasePath = () => {
 
 const data: ISiteMetadataResult = {
   siteTitle: 'Running Page',
-  siteUrl: 'https://yihong.run',
-  logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTtc69JxHNcmN1ETpMUX4dozAgAN6iPjWalQ&usqp=CAU',
+  siteUrl: 'https://llussy.github.io/running_page/',
+  logo: 'https://avatars.githubusercontent.com/u/18432966?s=400&u=6b207ec47455037a572ed617edf97ab26ea856f1&v=4',
   description: 'Personal site and blog',
   navLinks: [
     {
